@@ -54,6 +54,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface
 
+# IR
+PRODUCT_PACKAGES += \
+    consumerir.mrvl
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
     device/samsung/degaswifi/rootdir/fstab.pxa1088:root/fstab.pxa1088 \
