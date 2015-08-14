@@ -58,10 +58,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     consumerir.mrvl
 
-# Marvell
+# Wireless
 PRODUCT_PACKAGES += \
-    libHWComposerGC \
-    libMarvellWireless
+    libMarvellWireless \
+    MarvellWirelessDaemon
+
+# Graphics
+PRODUCT_PACKAGES += \
+    libHWComposerGC 
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
