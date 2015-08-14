@@ -24,17 +24,26 @@ BOARD_USES_MRVL_HARDWARE := true
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a7
 TARGET_BOARD_PLATFORM := mrvl
-TARGET_BOOTLOADER_BOARD_NAME := PXA1088
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := cortex-a7
+
+
+# Kernel, bootloader, etc.
+TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
+TARGET_KERNEL_CONFIG := cyanogenmod_degaswifi_defconfig
+BOARD_KERNEL_BASE := 0x10000000
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
+BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/rootdir/boot.img-dt --ramdisk_offset 0x01000000
+BOARD_KERNEL_PAGESIZE := 2048
+TARGET_BOOTLOADER_BOARD_NAME := PXA1088
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := degas
+TARGET_OTA_ASSERT_DEVICE := degaswifi,degas,SM-T230,SM-T230NU
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -48,6 +57,9 @@ MRVL_WIRELESS_DAEMON_API := true
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := true
 
+# Prebuilt webview
+PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+
 # CM Hardware
 BOARD_HARDWARE_CLASS := device/samsung/degaswifi/cmhw
 
@@ -56,19 +68,16 @@ COMMON_GLOBAL_CFLAGS += -DMRVL_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
+# Marvell ION (Generic config)
+MRVL_ION := true
+
 # Graphics
 BOARD_USES_HWCOMPOSER := false
 BOARD_HAVE_PIXEL_FORMAT_INFO := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_OPENGL_RENDERER := true
 
-# Kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
-TARGET_KERNEL_CONFIG := cyanogenmod_degaswifi_defconfig
-BOARD_KERNEL_BASE := 0x10000000
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
-BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/rootdir/boot.img-dt --ramdisk_offset 0x01000000
-BOARD_KERNEL_PAGESIZE := 2048
+
 
 # Healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.mrvl

@@ -58,6 +58,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     consumerir.mrvl
 
+# Marvell
+PRODUCT_PACKAGES += \
+    libHWComposerGC \
+    libMarvellWireless
+
 # Ramdisk
 PRODUCT_COPY_FILES += \
     device/samsung/degaswifi/rootdir/fstab.pxa1088:root/fstab.pxa1088 \
