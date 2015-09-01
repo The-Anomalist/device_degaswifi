@@ -51,7 +51,7 @@ BOARD_USES_ALSA_AUDIO := true
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/degaswifi/bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_MRVL := true
+BOARD_HAVE_BLUETOOTH_MRVL := false
 MRVL_WIRELESS_DAEMON_API := true
 
 # Charging mode
