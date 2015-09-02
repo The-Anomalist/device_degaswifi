@@ -257,6 +257,15 @@ enum {
     HAL_PIXEL_FORMAT_YCbCr_420_I        = 0x15,
     HAL_PIXEL_FORMAT_CbYCrY_422_I       = 0x16, // UYVY
     HAL_PIXEL_FORMAT_YCbCr_420_SP_MRVL  = 0x2A, // NV12
+
+    HAL_PIXEL_FORMAT_RAW16 				= 0x20,
+    HAL_PIXEL_FORMAT_RAW10   			= 0x25,
+    HAL_PIXEL_FORMAT_RAW_OPAQUE 		= 0x24,
+
+
+
+
+
 };
 
 /*
