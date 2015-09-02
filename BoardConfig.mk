@@ -20,11 +20,12 @@ USE_CAMERA_STUB := true
 
 # MRVL hardware
 BOARD_USES_MRVL_HARDWARE := true
+MRVL_ION := true
 
 # Architecture
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a7
+TARGET_CPU_VARIANT := cortex-a9
 TARGET_BOARD_PLATFORM := mrvl
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
@@ -68,11 +69,8 @@ COMMON_GLOBAL_CFLAGS += -DMRVL_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 
-# Marvell ION (Generic config)
-MRVL_ION := true
-
 # Graphics
-BOARD_USES_HWCOMPOSER := false
+BOARD_USES_MRVL_HARDWARE := true
 BOARD_HAVE_PIXEL_FORMAT_INFO := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 USE_OPENGL_RENDERER := true
@@ -97,7 +95,11 @@ TARGET_RECOVERY_FSTAB := device/samsung/degaswifi/rootdir/fstab.pxa1088
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun%d/file"
 
+# Legacy MMAP for pre-lollipop blobs
+BOARD_USES_LEGACY_MMAP := true
+
 # WiFi
+BOARD_HAVE_MARVELL_WIFI := true
 BOARD_WLAN_VENDOR := MRVL
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/sd8xxx.ko"
 WIFI_DRIVER_MODULE_NAME	:= "sd8xxx"
