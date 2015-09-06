@@ -40,6 +40,7 @@ BOARD_CUSTOM_MKBOOTIMG := device/samsung/degaswifi/degas-mkbootimg
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
 BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/rootdir/boot.img-dt --ramdisk_offset 0x01000000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_CMDLINE := androidboot.selinux=disabled
 TARGET_BOOTLOADER_BOARD_NAME := PXA1088
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
