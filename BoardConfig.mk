@@ -46,6 +46,9 @@ TARGET_NO_RADIOIMAGE := true
 # Assert
 TARGET_OTA_ASSERT_DEVICE := degaswifi,degas,SM-T230,SM-T230NU
 
+# Use file-based OTA zips
+BLOCK_BASED_OTA := false
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 
