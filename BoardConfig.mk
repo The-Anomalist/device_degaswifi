@@ -15,6 +15,12 @@
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/degaswifi/include
 
+# Hacks
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_ENFORCE_SYSPROP_OWNER := true
+BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
+
 # Target info
 USE_CAMERA_STUB := true
 
@@ -34,16 +40,28 @@ TARGET_CPU_SMP := true
 
 # Kernel, bootloader, etc.
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
-TARGET_KERNEL_CONFIG := cyanogenmod_degaswifi_defconfig
+TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
+
+#kernel stuffs
+BOARD_KERNEL_CMDLINE := initrd=0x01400000,12m rw uart_dma vmalloc=0x10000000 hwdfc=1 qhd_lcd=1 touch_type=0 androidboot.hardware=pxa1088 sec_debug.reset_reason=0x0 recovery_mode=1 ddr_mode=1 androidboot.emmc_checksum=3 androidboot.serialno=3004d96873b84100 lcd_id=0x005eb810 board_id=0x03 max_freq=1183 disp_start_addr=0x17000000 androidboot.debug_level=0x4f4c sec_debug.level=0 androidboot.lcd=WVGA sec_log=0x100000@0x8140000 cordon=87092f31480448a9f316c97caabd207b
 BOARD_KERNEL_BASE := 0x10000000
-BOARD_CUSTOM_MKBOOTIMG := device/samsung/degaswifi/degas-mkbootimg
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
-BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/rootdir/boot.img-dt --ramdisk_offset 0x01000000
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := androidboot.selinux=disabled
-TARGET_BOOTLOADER_BOARD_NAME := PXA1088
+BOARD_NAME :=
+BOARD_PAGE_SIZE := 2048
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_SECOND_OFFSET := 0x00f00000
+BOARD_TAGS_OFFSET := 0x00000100
+BOARD_DT_SIZE := 534528
+BOARD_UNKNOWN := 0x02000000
+#BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/prebuilts/boot.img-dt 
+
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+
+# DTB
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+#BOARD_MKBOOTIMG_ARGS += --dtb device/samsung/degaswifi/prebuilts/dtb.img
+BOARD_MKBOOTIMG_ARGS += --ramdisk device/samsung/degaswifi/prebuilts/ramdisk.img
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := degaswifi,degas,SM-T230,SM-T230NU
@@ -67,12 +85,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := true
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 # CM Hardware
-BOARD_HARDWARE_CLASS := device/samsung/degaswifi/cmhw
-
-# Flags
-COMMON_GLOBAL_CFLAGS += -DMRVL_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+BOARD_HARDWARE_CLASS := device/samsung/degaswifi/aosphw
 
 # Graphics
 BOARD_USES_MRVL_HARDWARE := true
@@ -82,7 +95,7 @@ USE_OPENGL_RENDERER := true
 ENABLE_HWC_GC_PATH := true
 
 # Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mrvl
+#BOARD_HAL_STATIC_LIBRARIES := libhealthd.mrvl
     
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -95,7 +108,7 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun0/file"
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/degaswifi/rootdir/fstab.pxa1088
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.2/
+#TARGET_PLATFORM_DEVICE_BASE := /devices/soc.2/
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -103,6 +116,15 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun%d/
 
 # Legacy MMAP for pre-lollipop blobs
 BOARD_USES_LEGACY_MMAP := true
+
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+    device/samsung/degaswifi/sepolicy
+    
+# SELinux_Custom
+BOARD_SEPOLICY_DIRS += \
+    device/samsung/degaswifi/sepolicy-custom 
+
 
 # WiFi
 BOARD_HAVE_MARVELL_WIFI := true

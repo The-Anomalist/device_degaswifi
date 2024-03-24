@@ -9,11 +9,14 @@ TARGET_SCREEN_WIDTH := 800
 $(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/samsung/degaswifi/full_degaswifi.mk)
+$(call inherit-product, device/samsung/degaswifi/aosp_degaswifi.mk)
+
+# Inherit device configuration
+$(call inherit-product, device/samsung/degaswifi/BoardConfig-Graphics.mk)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := degaswifi
-PRODUCT_NAME := cm_degaswifi
+PRODUCT_NAME := aosp_degaswifi
 PRODUCT_BRAND := Samsung
 PRODUCT_MODEL := SM-T230
 PRODUCT_MANUFACTURER := samsung
