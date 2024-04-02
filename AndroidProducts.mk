@@ -16,4 +16,4 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_degaswifi.mk \
-    $(LOCAL_DIR)/lineage.mk
+    $(LOCAL_DIR)/aosp.mk

@@ -19,7 +19,7 @@ LOCAL_PATH := device/samsung/degaswifi
 TARGET_BOARD_OMAP_CPU := 4430
 
 # Include common omap4 makefile
-$(call inherit-product, hardware/ti/omap4/omap4.mk)
+#$(call inherit-product, hardware/ti/omap4/omap4.mk)
 
 # Include LineageOS specific additions
 $(call inherit-product, device/samsung/degaswifi/device-custom.mk)
@@ -76,9 +76,9 @@ PRODUCT_COPY_FILES += \
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/usr/keychars/espresso-gpio-keypad.kcm:system/usr/keychars/espresso-gpio-keypad.kcm \
+    $(LOCAL_PATH)/usr/keychars/degas-gpio-keypad.kcm:system/usr/keychars/degas-gpio-keypad.kcm \
     $(LOCAL_PATH)/usr/keychars/sec_keyboard.kcm:system/usr/keychars/sec_keyboard.kcm \
-    $(LOCAL_PATH)/usr/keylayout/espresso-gpio-keypad.kl:system/usr/keylayout/espresso-gpio-keypad.kl \
+    $(LOCAL_PATH)/usr/keylayout/degas-gpio-keypad.kl:system/usr/keylayout/degas-gpio-keypad.kl \
     $(LOCAL_PATH)/usr/keylayout/sec_keyboard.kl:system/usr/keylayout/sec_keyboard.kl
 
 # Packages

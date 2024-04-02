@@ -23,18 +23,32 @@
 # Build SGX KM
 -include hardware/ti/omap4/pvr-km.mk
 
-TARGET_NO_BOOTLOADER := true
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := cortex-a9
+TARGET_BOARD_PLATFORM := mrvl
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
 
-TARGET_BOOTLOADER_BOARD_NAME := PXA1088
 
-# Inline kernel building
+# Kernel, bootloader, etc.
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
-TARGET_KERNEL_CONFIG := degaswifi_defconfig
-BOARD_NAND_PAGE_SIZE := 4096
-BOARD_NAND_SPARE_SIZE := 128
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_BASE := 0x40000000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=degaswifi
+TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
+
+#kernel stuffs
+BOARD_KERNEL_CMDLINE := initrd=0x01400000,12m rw uart_dma vmalloc=0x10000000 hwdfc=1 qhd_lcd=1 touch_type=0 androidboot.hardware=pxa1088 sec_debug.reset_reason=0x0 recovery_mode=1 ddr_mode=1 androidboot.emmc_checksum=3 androidboot.serialno=3004d96873b84100 lcd_id=0x005eb810 board_id=0x03 max_freq=1183 disp_start_addr=0x17000000 androidboot.debug_level=0x4f4c sec_debug.level=0 androidboot.lcd=WVGA sec_log=0x100000@0x8140000 cordon=87092f31480448a9f316c97caabd207b
+BOARD_KERNEL_BASE := 0x10000000
+BOARD_NAME :=
+BOARD_PAGE_SIZE := 2048
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_SECOND_OFFSET := 0x00f00000
+BOARD_TAGS_OFFSET := 0x00000100
+BOARD_DT_SIZE := 534528
+BOARD_UNKNOWN := 0x02000000
+#BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/prebuilts/boot.img-dt 
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true

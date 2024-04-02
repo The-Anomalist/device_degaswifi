@@ -19,7 +19,7 @@ TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 800
 
 # Inherit common LineageOS configuration
-$(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, vendor/pa/config/common_full_tablet_wifionly.mk)
 
 # LineageOS specific overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay/lineage-common
@@ -28,7 +28,7 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay/lineage-common
 $(call inherit-product, device/samsung/degaswifi/aosp_degaswifi.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_NAME := lineage_degaswifi
+PRODUCT_NAME := aosp_degaswifi
 
 # Device build info and fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
