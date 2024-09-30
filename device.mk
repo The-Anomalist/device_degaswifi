@@ -15,7 +15,7 @@
 #
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay
+#DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay
 
 # Hardware permissions
 PRODUCT_COPY_FILES += \

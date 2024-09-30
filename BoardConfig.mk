@@ -13,7 +13,12 @@
 # limitations under the License.
 #
 
+BOARD_CUSTOM_HARDWARE_MK := device/samsung/degaswifi/LibHardware.mk
+
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/degaswifi/include
+
+# Add the flag to disable the packed member warning
+TARGET_GLOBAL_CFLAGS += -Wno-address-of-packed-member
 
 # Target info
 USE_CAMERA_STUB := true
@@ -31,19 +36,27 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 
-
 # Kernel, bootloader, etc.
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
-TARGET_KERNEL_CONFIG := cyanogenmod_degaswifi_defconfig
-BOARD_KERNEL_BASE := 0x10000000
-BOARD_CUSTOM_MKBOOTIMG := device/samsung/degaswifi/degas-mkbootimg
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
-BOARD_MKBOOTIMG_ARGS := --dt device/samsung/degaswifi/rootdir/boot.img-dt --ramdisk_offset 0x01000000
-BOARD_KERNEL_PAGESIZE := 2048
+TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
+
+# Kernel command line
 BOARD_KERNEL_CMDLINE := androidboot.selinux=disabled
-TARGET_BOOTLOADER_BOARD_NAME := PXA1088
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
+
+# Memory addresses and sizes
+BOARD_NAME := PXA1088
+BOARD_KERNEL_BASE := 0x10000000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_SECOND_OFFSET := 0x00f00000
+BOARD_TAGS_OFFSET := 0x00000100
+BOARD_PAGE_SIZE := 2048
+BOARD_SECOND_SIZE := 0
+BOARD_DT_SIZE := 534528
+
+# Boot image configurations
+PRODUCT_HOST_EXECUTABLES += mkbootimg
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/degaswifi_mkbootimg.mk
+BOARD_DTB_IMAGE := device/samsung/degaswifi/dts/pxa1088-degaswifi-r01.dtb  # Specify the desired DTB
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := degaswifi,degas,SM-T230,SM-T230NU
@@ -70,9 +83,9 @@ PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 BOARD_HARDWARE_CLASS := device/samsung/degaswifi/cmhw
 
 # Flags
-COMMON_GLOBAL_CFLAGS += -DMRVL_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+TARGET_CFLAGS += -DMRVL_HARDWARE
+TARGET_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+TARGET_CFLAGS += -DNO_SECURE_DISCARD
 
 # Graphics
 BOARD_USES_MRVL_HARDWARE := true
@@ -83,7 +96,7 @@ ENABLE_HWC_GC_PATH := true
 
 # Healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.mrvl
-    
+
 # Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
@@ -108,7 +121,7 @@ BOARD_USES_LEGACY_MMAP := true
 BOARD_HAVE_MARVELL_WIFI := true
 BOARD_WLAN_VENDOR := MRVL
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/sd8xxx.ko"
-WIFI_DRIVER_MODULE_NAME	:= "sd8xxx"
+WIFI_DRIVER_MODULE_NAME := "sd8xxx"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/firmware/mrvl/sd8777_uapsta.bin cfg80211_wext=12 sta_name=wlan uap_name=wlan wfd_name=p2p fw_name=mrvl/sd8777_uapsta.bin"
 WIFI_DRIVER_FW_PATH_PARAM := "/sys/module/sd8xxx/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA := "/system/etc/firmware/mrvl/sd8777_uapsta.bin"
@@ -118,3 +131,4 @@ WIFI_SDIO_IF_DRIVER_MODULE_PATH := "/system/lib/modules/mlan.ko"
 WIFI_SDIO_IF_DRIVER_MODULE_NAME := "mlan"
 WIFI_SDIO_IF_DRIVER_MODULE_ARG := ""
 MRVL_WIRELESS_DAEMON_API := true
+

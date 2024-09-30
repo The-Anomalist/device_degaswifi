@@ -1,5 +1,4 @@
-#only TZ mode will mount secure partition successful
-
+# Only TZ mode will mount secure partition successfully
 on fs
     mkdir /teesst 0700 root root
     mount ext4 /dev/block/platform/soc.2/by-name/SSTD /teesst
@@ -11,7 +10,7 @@ on property:ro.security.mode=tz
     start teecsstdca
 
 on property:ro.security.mode=ntz
-   insmod /system/lib/modules/geu.ko
+    insmod /system/lib/modules/geu.ko
 
 service teecsstdca /system/bin/teec_sstd_ca /teesst
     class main
