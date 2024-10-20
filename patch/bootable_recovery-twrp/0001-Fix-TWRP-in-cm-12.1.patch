@@ -1,0 +1,27 @@
+From 82f13a27d2caa3b3d13d081fd76b6e203a4ceaa9 Mon Sep 17 00:00:00 2001
+From: Kra1o5 <kra1o5x@gmail.com>
+Date: Fri, 24 Apr 2015 20:53:15 +0200
+Subject: [PATCH] Fix-TWRP-in-cm-12.1
+
+---
+ Android.mk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Android.mk b/Android.mk
+index ddd2c7d..8343b5d 100644
+--- a/Android.mk
++++ b/Android.mk
+@@ -349,8 +349,8 @@ ifeq ($(TW_INCLUDE_DUMLOCK), true)
+         libflashutils.so libmmcutils.so libmtdutils.so HTCDumlock.apk
+ endif
+ ifneq ($(TW_EXCLUDE_SUPERSU), true)
+-    LOCAL_ADDITIONAL_DEPENDENCIES += \
+-        su install-recovery.sh 99SuperSUDaemon Superuser.apk
++     LOCAL_ADDITIONAL_DEPENDENCIES += \
++         chattr.pie libsupol.so su supolicy install-recovery.sh install-supersu.sh 99SuperSUDaemon Superuser.apk
+ endif
+ ifneq ($(TW_NO_EXFAT_FUSE), true)
+     LOCAL_ADDITIONAL_DEPENDENCIES += exfat-fuse
+-- 
+2.3.6
+
