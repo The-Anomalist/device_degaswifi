@@ -16,3 +16,8 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_degaswifi.mk
+    
+COMMON_LUNCH_CHOICES := \
+    aosp_degaswifi-eng\
+    aosp_degaswifi-userdebug\
+    aosp_degaswifi-user    
