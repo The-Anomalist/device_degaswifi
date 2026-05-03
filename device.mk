@@ -39,15 +39,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml
 
 PRODUCT_CHARACTERISTICS := tablet
+PRODUCT_FULL_TREBLE_OVERRIDE := false
 
 # Enable higher-res drawables while keeping mdpi as primary source
 PRODUCT_AAPT_CONFIG := large mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 PRODUCT_LOCALES += mdpi
 
-#adb
-ADDITIONAL_DEFAULT_PROPERTIES += \
-ro.adb.secure=0
+# Android 8.1 property buckets
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.adb.secure=1 \
+    ro.debuggable=0 \
+    persist.sys.usb.config=mtp
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -89,9 +92,18 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# ART
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=interpret-only \
-    dalvik.vm.image-dex2oat-filter=speed
+# ART / low-memory tuning for legacy hardware on Oreo
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-filter=quicken \
+    dalvik.vm.image-dex2oat-filter=speed-profile \
+    dalvik.vm.heapstartsize=8m \
+    dalvik.vm.heapgrowthlimit=128m \
+    dalvik.vm.heapsize=256m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapmaxfree=8m
+
+# Android 8.1 shipping level (device launched on KitKat)
+PRODUCT_SHIPPING_API_LEVEL := 19
 
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)

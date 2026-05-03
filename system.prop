@@ -4,3 +4,6 @@
 ro.zygote.disable_gl_preload=true
 ro.opengles.version = 131072
 ro.sf.lcd_density=213
+ro.config.low_ram=true
+debug.hwui.renderer=opengl
+persist.sys.dalvik.vm.lib.2=libart.so
