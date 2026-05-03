@@ -36,6 +36,9 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 
+# Android 8.1 (Oreo MR1) legacy bring-up profile
+TARGET_USES_HWC2 := false
+
 
 
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
@@ -55,6 +58,9 @@ BOARD_KERNEL_CMDLINE := console=ttyS0,115200n8 androidboot.hardware=pxa1088
 # No bootloader/radio images
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
+
+# This device has no dedicated vendor partition in stock layout
+TARGET_COPY_OUT_VENDOR := system/vendor
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := degaswifi,degas,SM-T230,SM-T230NU
@@ -97,6 +103,9 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/f_mass_storage/lun0/file"
 TARGET_RECOVERY_FSTAB := device/samsung/degaswifi/rootdir/fstab.pxa1088
 # TARGET_PLATFORM_DEVICE_BASE := /devices/soc.2/
 
+# Oreo target files / non-A/B OTA tooling compatibility
+TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
+
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun%d/file"
@@ -112,6 +121,9 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/degaswifi/sepolicy-custom
 SELINUX_FC := device/samsung/degaswifi/sepolicy/file_contexts
 SELINUX_IGNORE_NEVERALLOWS := true
+
+# Keep AOSP OTA generation path for legacy partitions
+AB_OTA_UPDATER := false
 
 # Wi-Fi (align with sd8887 kernel modules)
 BOARD_HAVE_MARVELL_WIFI := true

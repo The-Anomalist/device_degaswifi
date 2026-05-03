@@ -1,5 +1,11 @@
 # Device configuration for Samsung Galaxy Tab 4 7"
 
+## Android 8.1 compatibility notes
+- Device tree is configured for **Android 8.1 (Oreo MR1)** bring-up on legacy non-Treble partitioning.
+- Shipping API level is preserved at **19** to match KitKat launch requirements.
+- SELinux policy remains permissive for neverallow checks during initial legacy hardware stabilization.
+- Build/product properties were updated for low-RAM behavior and legacy HAL compatibility.
+
 ## Spec Sheet
 | Feature                 | Specification                     |
 | :---------------------- | :-------------------------------- |

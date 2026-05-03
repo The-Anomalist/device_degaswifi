@@ -44,13 +44,15 @@ PRODUCT_FULL_TREBLE_OVERRIDE := false
 # Enable higher-res drawables while keeping mdpi as primary source
 PRODUCT_AAPT_CONFIG := large mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
-PRODUCT_LOCALES += mdpi
+PRODUCT_LOCALES := en_US
 
 # Android 8.1 property buckets
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=1 \
     ro.debuggable=0 \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp \
+    ro.treble.enabled=false \
+    ro.config.low_ram=true
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -73,6 +75,10 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
     libHWComposerGC 
+
+# Legacy permission compatibility XML (Android 8.1)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.ram.low.xml:system/etc/permissions/android.hardware.ram.low.xml
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
@@ -105,5 +111,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Android 8.1 shipping level (device launched on KitKat)
 PRODUCT_SHIPPING_API_LEVEL := 19
+
+# Keep non-binderized HALs for pre-Treble hardware targets
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.hwc.mdpcomp.enable=false
 
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
