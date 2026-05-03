@@ -13,19 +13,10 @@
 # limitations under the License.
 #
 
-# Temporarily skip generating OTA public keys so we don't need dumpkey.jar
-PRODUCT_OTA_PUBLIC_KEYS :=
-
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/degaswifi/include
 TARGET_SPECIFIC_HEADER_PATH += device/samsung/degaswifi/pxa-mkbootimg
 
 # --- Build knobs / bring-up helpers ---
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-BUILD_BROKEN_ENFORCE_SYSPROP_OWNER := true
-BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
-WITH_ADDRESS_SANITIZER := false
-USE_CLANG_PLATFORM_BUILD := false
 TARGET_NO_BOOTANIMATION := true
 
 # Target info
@@ -46,12 +37,6 @@ TARGET_CPU_SMP := true
 
 
 
-# Force Clang for all TARGET (device) code on Nougat
-TARGET_BUILD_USE_CLANG := true
-USE_CLANG_PLATFORM_BUILD := true
-
-# Make sure LLVM triple is set (helps some modules on N)
-LLVM_TRIPLE := arm-linux-androideabi
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
 TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
 
@@ -87,9 +72,6 @@ MRVL_WIRELESS_DAEMON_API := true
 
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := true
-
-# WebView
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
 # CM/Lineage/AOSP hardware class (custom)
 BOARD_HARDWARE_CLASS := device/samsung/degaswifi/aosphw
@@ -128,7 +110,6 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/degaswifi/sepolicy-custom
 SELINUX_FC := device/samsung/degaswifi/sepolicy/file_contexts
 SELINUX_IGNORE_NEVERALLOWS := true
-BOARD_SEPOLICY_VERS := 25.0
 
 # Wi-Fi (align with sd8887 kernel modules)
 BOARD_HAVE_MARVELL_WIFI := true
