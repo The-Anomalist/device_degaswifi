@@ -43,3 +43,5 @@
 
 # sysfs
 /sys/board/type                             u:object_r:sysfs_board_type:s0
+/data/gps(/.*)?                                              u:object_r:gps_data_file:s0
+

@@ -39,20 +39,20 @@ TARGET_CPU_SMP := true
 # Android 8.1 (Oreo MR1) legacy bring-up profile
 TARGET_USES_HWC2 := false
 
-
+TARGET_NO_RECOVERY := true
 
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
 TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
+BOARD_KERNEL_IMAGE_NAME := zImage
 
 # Boot / mkbootimg (PXA1088)
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/mkbootimg.mk
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_PAGE_SIZE := 2048
-BOARD_KERNEL_OFFSET := 0x00008000     # => 0x10008000
-BOARD_RAMDISK_OFFSET := 0x01000000    # => 0x11000000
-BOARD_SECOND_OFFSET := 0x00f00000     # => 0x10f00000
-BOARD_TAGS_OFFSET := 0x00000100       # => 0x10000100
-# Keep cmdline minimal; bootloader typically appends device-specific args
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_SECOND_OFFSET := 0x00f00000
+BOARD_TAGS_OFFSET := 0x00000100
 BOARD_KERNEL_CMDLINE := console=ttyS0,115200n8 androidboot.hardware=pxa1088
 
 # No bootloader/radio images

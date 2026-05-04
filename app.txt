@@ -1,0 +1,44 @@
+diff --git a/sepolicy/file.te b/sepolicy/file.te
+index da13014ad3c3186e31eabdfc0a20784c3a68d525..8b8e545f2dd75f54680d9559b1f16a9b7cbccbaa 100644
+--- a/sepolicy/file.te
++++ b/sepolicy/file.te
+@@ -1,4 +1,6 @@
+ # Filesystem types
++type gps_data_file, file_type, data_file_type;
++type efs_file, file_type;
+ type sensors_data_file, file_type, data_file_type;
+ type firmware_ducati, file_type; 
+ type sysfs_board_type, fs_type, sysfs_type;
+diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
+index 033e39049ed761fc49da8d1d722a79b0a65c2502..bd20ca67cd5b203175e82bd1e9dbf1a9a2bdcaac 100644
+--- a/sepolicy/file_contexts
++++ b/sepolicy/file_contexts
+@@ -21,25 +21,27 @@
+ 
+ # GPS
+ /dev/ttyO0                                  u:object_r:gps_device:s0
+ 
+ # Wifi
+ /efs/wifi/.mac.info                         u:object_r:wifi_data_file:s0
+ 
+ # Firmwares
+ /system/vendor/firmware/ducati-m3.bin       u:object_r:firmware_ducati:s0
+ 
+ # Block devices
+ /dev/block/mmcblk0                                      u:object_r:root_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/EFS       u:object_r:efs_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/MODEM     u:object_r:radio_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/KERNEL    u:object_r:boot_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/RECOVERY  u:object_r:recovery_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/FACTORYFS u:object_r:system_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/CACHE     u:object_r:cache_block_device:s0
+ /dev/block/platform/omap/omap_hsmmc.1/by-name/DATAFS    u:object_r:userdata_block_device:s0
+ 
+ # Swap
+ /dev/block/zram(.*)                                     u:object_r:swap_block_device:s0
+ 
+ # sysfs
+ /sys/board/type                             u:object_r:sysfs_board_type:s0
++/data/gps(/.*)?                                              u:object_r:gps_data_file:s0
++/efs(/.*)?                                                   u:object_r:efs_file:s0
+

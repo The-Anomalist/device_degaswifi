@@ -76,9 +76,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libHWComposerGC 
 
-# Legacy permission compatibility XML (Android 8.1)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.ram.low.xml:system/etc/permissions/android.hardware.ram.low.xml
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
