@@ -1,8 +1,6 @@
-import init_bsp.rc
 import init.pxa1088.usb.rc
-import init.pxa1088.tel.rc
 import init.wifi.rc
-#import init.pxa1088.sensor.rc
+import init.pxa1088.sensor.rc
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
@@ -74,9 +72,9 @@ on init
     chmod 0664 /sys/class/mdnie/mdnie/accessibility
 
     #Permissions for bluetooth
-    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth bluetooth ro.bt.bdaddr_path
     mkdir /efs/bluetooth 0775 radio system
+    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
+    chown bluetooth bluetooth /efs/bluetooth/bt_addr
 
     chmod 0660 /sys/devices/platform/sd8x-rfkill/pwr_ctrl
     chown system system /sys/devices/platform/sd8x-rfkill/pwr_ctrl
@@ -327,9 +325,6 @@ on post-fs
 
     insmod /system/lib/modules/geu.ko
 
-    insmod /system/lib/modules/blcr_imports.ko
-    insmod /system/lib/modules/blcr.ko
-
     chown system system /sys/devices/platform/galcore/power/control
     #gpu
     chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_cur_governor
@@ -350,9 +345,6 @@ on post-fs
 
 on post-fs-data
     setprop vold.post_fs_data_done 1
-
-    # for blcr
-    mkdir /data/blcr 0775 system system
 
     #Power Meter: for duty cycle profiling
     chown system system /sys/kernel/debug/pxa/stat/cpu_dc_stat
