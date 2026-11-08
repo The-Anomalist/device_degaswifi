@@ -18,4 +18,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
+# Host tools for the PXA1088-specific boot image and DT table formats.
+include hardware/marvell/pxa1088-mkbootimg/Android.mk
+
 endif
