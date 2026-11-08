@@ -17,7 +17,6 @@
 PRODUCT_OTA_PUBLIC_KEYS :=
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/degaswifi/include
-TARGET_SPECIFIC_HEADER_PATH += device/samsung/degaswifi/pxa-mkbootimg
 
 # --- Build knobs / bring-up helpers ---
 BUILD_BROKEN_DUP_RULES := true
@@ -27,9 +26,6 @@ BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 WITH_ADDRESS_SANITIZER := false
 USE_CLANG_PLATFORM_BUILD := false
 TARGET_NO_BOOTANIMATION := true
-
-# Target info
-USE_CAMERA_STUB := true
 
 # MRVL hardware
 BOARD_USES_MRVL_HARDWARE := true
@@ -54,6 +50,8 @@ USE_CLANG_PLATFORM_BUILD := true
 LLVM_TRIPLE := arm-linux-androideabi
 TARGET_KERNEL_SOURCE := kernel/samsung/degaswifi
 TARGET_KERNEL_CONFIG := pxa1088_degaswifi_eur_defconfig
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
 
 # Boot / mkbootimg (PXA1088)
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/degaswifi/mkbootimg.mk
@@ -121,6 +119,9 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/f_mass_storage/lun%d/
 BOARD_USES_LEGACY_MMAP := true
 
 # SELinux
+include vendor/cm/build/core/config.mk
+include vendor/cm/sepolicy/sepolicy.mk
+
 BOARD_SEPOLICY_DIRS += \
     device/samsung/degaswifi/sepolicy
 # Keep only if it actually contains .te/context files

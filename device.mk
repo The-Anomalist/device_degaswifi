@@ -21,7 +21,7 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
@@ -43,12 +43,6 @@ PRODUCT_CHARACTERISTICS := tablet
 # Enable higher-res drawables while keeping mdpi as primary source
 PRODUCT_AAPT_CONFIG := large mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
-PRODUCT_LOCALES += mdpi
-
-#adb
-ADDITIONAL_DEFAULT_PROPERTIES += \
-ro.adb.secure=0
-
 # Charger
 PRODUCT_PACKAGES += \
     charger \
@@ -62,19 +56,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     consumerir.mrvl
 
-# Wireless
-PRODUCT_PACKAGES += \
-    libMarvellWireless \
-    MarvellWirelessDaemon
-
-# Graphics
-PRODUCT_PACKAGES += \
-    libHWComposerGC 
-
 # Ramdisk
 PRODUCT_COPY_FILES += \
     device/samsung/degaswifi/rootdir/fstab.pxa1088:root/fstab.pxa1088 \
-    device/samsung/degaswifi/rootdir/init_bsp.rc:root/init_bsp.rc \
     device/samsung/degaswifi/rootdir/init_bsp.pxa1088.rc:root/init_bsp.pxa1088.rc \
     device/samsung/degaswifi/rootdir/init.pxa1088.rc:root/init.pxa1088.rc \
     device/samsung/degaswifi/rootdir/init.pxa1088.sensor.rc:root/init.pxa1088.sensor.rc \
@@ -84,6 +68,11 @@ PRODUCT_COPY_FILES += \
     device/samsung/degaswifi/rootdir/init.pxa1088.tel.rc:root/init.pxa1088.tel.rc \
     device/samsung/degaswifi/rootdir/init.wifi.rc:root/init.wifi.rc \
     device/samsung/degaswifi/rootdir/ueventd.pxa1088.rc:root/ueventd.pxa1088.rc
+
+# Wi-Fi supplicant overlays
+PRODUCT_COPY_FILES += \
+    device/samsung/degaswifi/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    device/samsung/degaswifi/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Misc
 PRODUCT_PACKAGES += \

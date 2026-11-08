@@ -15,12 +15,19 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
+# Lineage common configuration and policy for a Wi-Fi-only tablet.
+$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+
 # Set those variables here to overwrite the inherited values.
 PRODUCT_NAME := aosp_degaswifi
 PRODUCT_DEVICE := degaswifi
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
 PRODUCT_MODEL := SM-T230NU
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT=samsung/degaswifixx/degaswifi:4.4.2/KOT49H/T230NUXXU0APA1:user/release-keys \
+    PRIVATE_BUILD_DESC="degaswifixx-user 4.4.2 KOT49H T230NUXXU0APA1 release-keys"
 
 # Inherit makefile
 $(call inherit-product, device/samsung/degaswifi/device.mk)
