@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+# LineageOS home launcher
+PRODUCT_PACKAGES += \
+    Trebuchet
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/degaswifi/overlay
 
@@ -84,3 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.image-dex2oat-filter=speed
 
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)
+
+# PXA1088 Nougat bring-up: temporary unauthenticated USB debugging
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0

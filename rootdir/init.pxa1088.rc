@@ -495,3 +495,8 @@ service sensord /system/bin/sensord
 # let FMRadioServer drop uid to system with the right linux capabilities
 service FMRadiod /system/bin/FMRadioServer
     class main
+
+
+# Temporary degaswifi ADB root bring-up
+on post-fs-data
+    setprop persist.sys.root_access 2

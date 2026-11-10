@@ -27,6 +27,7 @@ WITH_ADDRESS_SANITIZER := false
 USE_CLANG_PLATFORM_BUILD := false
 TARGET_NO_BOOTANIMATION := true
 
+
 # MRVL hardware
 BOARD_USES_MRVL_HARDWARE := true
 MRVL_ION := true
@@ -130,6 +131,13 @@ BOARD_SEPOLICY_DIRS += \
 SELINUX_FC := device/samsung/degaswifi/sepolicy/file_contexts
 SELINUX_IGNORE_NEVERALLOWS := true
 BOARD_SEPOLICY_VERS := 25.0
+
+# Temporary PXA1088 bring-up: disable ADB authentication
+# Development builds only
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+ADDITIONAL_DEFAULT_PROPERTIES := $(filter-out ro.adb.secure=%,$(ADDITIONAL_DEFAULT_PROPERTIES))
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
+endif
 
 # Wi-Fi (align with sd8887 kernel modules)
 BOARD_HAVE_MARVELL_WIFI := true
